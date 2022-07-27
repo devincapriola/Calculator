@@ -44,6 +44,8 @@ class Calculator:
         self.create_operator()
         self.clear_button()
         self.equal_button()
+        self.square_button()
+        self.square_root_button()
         self.bind_keys()
 
     def bind_keys(self):
@@ -106,7 +108,26 @@ class Calculator:
     def clear_button(self):
         button = tk.Button(self.buttons_frame, text="C", bg=OFF_WHITE, fg=LABEL_COLOR, font=FONT_SM,
                            borderwidth=0, command=self.clear)
-        button.grid(row=0, column=1, columnspan=3, sticky=tk.NSEW)
+        button.grid(row=0, column=1, sticky=tk.NSEW)
+
+    def square(self):
+        self.current_expression = str(eval(f"{self.current_expression} ** 2"))
+        self.update_label()
+
+    def square_button(self):
+        button = tk.Button(self.buttons_frame, text="x\u00b2", bg=OFF_WHITE, fg=LABEL_COLOR, font=FONT_SM,
+                           borderwidth=0, command=self.square)
+        button.grid(row=0, column=2, sticky=tk.NSEW)
+
+    def square_root(self):
+        self.current_expression = str(
+            eval(f"{self.current_expression} ** 0.5"))
+        self.update_label()
+
+    def square_root_button(self):
+        button = tk.Button(self.buttons_frame, text="x\u221ax", bg=OFF_WHITE, fg=LABEL_COLOR, font=FONT_SM,
+                           borderwidth=0, command=self.square_root)
+        button.grid(row=0, column=3, sticky=tk.NSEW)
 
     def evaluate(self):
         self.total_expression += self.current_expression
